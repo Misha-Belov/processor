@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
-const int NAME_MAX = 6;
-const int COMMAND_NUM = 7;
+const int NAME_MAX = 5;
+const int REGISTR_MAX = 4;
+const int COMMAND_NUM = 8;
+const int REGISTR_NUM = 4;
 
 enum command
 {
@@ -29,14 +32,28 @@ const struct operation ALL_COMMANDS[COMMAND_NUM] = {{"push", 1, 1},
                                                     {"div", 0, 4},
                                                     {"mul", 0, 5},
                                                     {"out", 0, 6},
-                                                    {"hlt", 0, -1} };
+                                                    {"hlt", 0, -1},
+                                                    {"pop", 1, 7}};
+
+struct registr
+{
+    char registr_name[REGISTR_MAX];
+    int digital_reg;
+};
+
+const struct registr ALL_REGISTRS[REGISTR_NUM] = {  {"arx", 1},
+                                                    {"brx", 2},
+                                                    {"crx", 3},
+                                                    {"drx", 4}};
 
 int main()
 {
     FILE* source = fopen("source.txt", "r");
+    FILE* res = fopen("dig.txt", "w");
 
-    char command[10] = {0};
-    int value = 0;
+    char command[NAME_MAX] = {0};
+    char registr[REGISTR_MAX] = {0};
+    // int value = 0;
 
     while (fscanf(source, "%s", command) != EOF)
     {
@@ -44,16 +61,44 @@ int main()
         {
             if (!strcmp(command, ALL_COMMANDS[i].command))
             {
-                printf("%d", ALL_COMMANDS[i].digital_com);
-
                 if (ALL_COMMANDS[i].arg_num != 0)
                 {
-                    if (fscanf(source, "%d", &value))
-                        printf(" %d", value);
+                    fscanf(source, "%s", registr);
+
+                    if (isdigit(registr[0]) || (registr[0] == '-' && isdigit(registr[1])))
+                    {
+                        printf("%d", ALL_COMMANDS[i].digital_com);
+                        fprintf(res, "%d", ALL_COMMANDS[i].digital_com);
+                        printf(" %s", registr);
+                        fprintf(res, " %s", registr);
+                    }
+                    else
+                    {
+                        for (int j = 0; j < REGISTR_NUM; j++)
+                        {
+                            if (!strcmp(registr, ALL_REGISTRS[j].registr_name))
+                            {
+                                printf("%d", ALL_COMMANDS[i].digital_com + 16);
+                                fprintf(res, "%d", ALL_COMMANDS[i].digital_com + 16);
+                                printf(" %d", ALL_REGISTRS[j].digital_reg);
+                                fprintf(res, " %d", ALL_REGISTRS[j].digital_reg);
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    printf("%d", ALL_COMMANDS[i].digital_com);
+                    fprintf(res, "%d", ALL_COMMANDS[i].digital_com);
                 }
 
                 printf("\n");
+                fprintf(res, "\n");
             }
         }
     }
+
+    fclose(source);
+    fclose(res);
 }
