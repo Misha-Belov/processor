@@ -1,7 +1,9 @@
 push 100
 push 200
-push arx
-pop brx
+out
+pop rax
+out
+push rax
 add
 out
 hlt

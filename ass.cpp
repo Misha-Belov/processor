@@ -1,55 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-
-const int NAME_MAX = 5;
-const int REGISTR_MAX = 4;
-const int COMMAND_NUM = 8;
-const int REGISTR_NUM = 4;
-
-enum command
-{
-    push = 1,
-    add = 2,
-    sub = 3,
-    dif = 4,
-    mul = 5,
-    out = 6,
-    hlt = -1,
-};
-
-struct operation
-{
-    char command[NAME_MAX];
-    int arg_num;
-    int digital_com;
-};
-
-const struct operation ALL_COMMANDS[COMMAND_NUM] = {{"push", 1, 1},
-                                                    {"add", 0, 2},
-                                                    {"sub", 0, 3},
-                                                    {"div", 0, 4},
-                                                    {"mul", 0, 5},
-                                                    {"out", 0, 6},
-                                                    {"hlt", 0, -1},
-                                                    {"pop", 1, 7}};
-
-struct registr
-{
-    char registr_name[REGISTR_MAX];
-    int digital_reg;
-};
-
-const struct registr ALL_REGISTRS[REGISTR_NUM] = {  {"arx", 1},
-                                                    {"brx", 2},
-                                                    {"crx", 3},
-                                                    {"drx", 4}};
+#include "ass.h"
 
 int main()
 {
     FILE* source = fopen("source.txt", "r");
-    FILE* res = fopen("dig.txt", "w");
+    FILE* res = fopen("digit.txt", "w");
 
     char command[NAME_MAX] = {0};
     char registr[REGISTR_MAX] = {0};

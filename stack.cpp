@@ -13,7 +13,6 @@ struct stack
     int* data;
     int size;
     int capacity;
-    int ax, bx, cx, dx;
 };
 
 int main()
