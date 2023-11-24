@@ -12,6 +12,7 @@ const int INIT_CAPACITY = 10;
 const int INIT_ARRAY = 10;
 
 void SPU_construct(struct SPU* proc);
+void SPU_deconstruct(struct SPU* proc);
 int* fill_array(int* array, int* size);
 void f_add(struct stack* pstk);
 void f_sub(struct stack* pstk);

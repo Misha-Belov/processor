@@ -62,6 +62,7 @@ int main()
             }
             case hlt:
             {
+                SPU_deconstruct(&proc);
                 return 0;
                 break;
             }
@@ -89,6 +90,23 @@ void SPU_construct(struct SPU* proc)
 
     proc->array_command = (int*) calloc(INIT_ARRAY, sizeof(int));
     proc->array_size = INIT_ARRAY;
+}
+
+void SPU_deconstruct(struct SPU* proc)
+{
+    free (proc->st.data);
+    proc->st.data = NULL;
+    proc->st.capacity = 0;
+    proc->st.size = 0;
+
+    proc->reg.rax = 0;
+    proc->reg.rbx = 0;
+    proc->reg.rcx = 0;
+    proc->reg.rdx = 0;
+
+    free (proc->array_command);
+    proc->array_command = NULL;
+    proc->array_size = 0;
 }
 
 int* fill_array(int* array, int* size)

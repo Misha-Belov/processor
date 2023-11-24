@@ -1,6 +1,5 @@
 push 100
 push 200
-in
 out
 pop rax
 out
