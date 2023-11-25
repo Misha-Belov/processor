@@ -68,7 +68,7 @@ int main()
             }
             default:
             {
-                return 0;
+                perror("wrong command\n");
                 break;
             }
         }
@@ -119,8 +119,13 @@ int* fill_array(int* array, int* size)
     {
         if(i == *size - 1)
         {
+            int* tmp = 0;
+            if (!(tmp = (int*) realloc(array, 2 * *size * sizeof(int))))
+            {
+                perror("problem in realloc\n");
+            }
             *size = *size * 2;
-            array = (int*) realloc(array, 2 * *size * sizeof(int));
+            array = tmp;
         }
 
         array[i] = value;
@@ -136,8 +141,7 @@ void f_push(struct stack* pstk, int value)
         int* tmp = 0;
         if (!(tmp = (int*) realloc(pstk->data, 2 * pstk->capacity * sizeof(int))))
         {
-            printf("%d\n", 2 * pstk->capacity * sizeof(int));
-            printf("problem in realloc\n");
+            perror("problem in realloc\n");
         }
         pstk->capacity = pstk->capacity * 2;
         pstk->data = tmp;
@@ -153,8 +157,7 @@ void f_push_r(struct stack* pstk, struct registrs* preg, int registr)
         int* tmp = 0;
         if (!(tmp = (int*) realloc(pstk->data, 2 * pstk->capacity * sizeof(int))))
         {
-            printf("%d\n", 2 * pstk->capacity * sizeof(int));
-            printf("problem in realloc\n");
+            perror("problem in realloc\n");
         }
         pstk->capacity = pstk->capacity * 2;
         pstk->data = tmp;
@@ -174,7 +177,7 @@ void f_push_r(struct stack* pstk, struct registrs* preg, int registr)
             *(pstk->data + pstk->size) = preg->rdx;
             break;
         default:
-            printf("wrong registr");
+            perror("wrong registr");
             break;
     }
 
@@ -185,7 +188,7 @@ void f_pop(struct stack* pstk, struct registrs* preg, int registr)
 {
     if (pstk->size == 0)
     {
-        printf("stack is empty\n");
+        perror("stack is empty\n");
     }
 
     switch (registr)
@@ -203,7 +206,7 @@ void f_pop(struct stack* pstk, struct registrs* preg, int registr)
             preg->rdx = *(pstk->data + pstk->size - 1);
             break;
         default:
-        printf("wrong registr");
+            perror("wrong registr");
             break;
     }
 
@@ -246,7 +249,7 @@ void f_out(struct stack* pstk, struct registrs* preg)
 {
     if (pstk->size == 0)
     {
-        printf("stack is empty\n");
+        perror("stack is empty\n");
         return;
     }
 
