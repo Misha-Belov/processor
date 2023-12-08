@@ -5,7 +5,7 @@
 
 const int NAME_MAX = 5;
 const int REGISTR_MAX = 4;
-const int COMMAND_NUM = 10;
+const int COMMAND_NUM = 19;
 const int REGISTR_NUM = 4;
 
 const int INIT_CAPACITY = 10;
@@ -14,16 +14,20 @@ const int INIT_ARRAY = 10;
 void SPU_construct(struct SPU* proc);
 void SPU_deconstruct(struct SPU* proc);
 int* fill_array(int* array, int* size);
+void cmd_execution(struct SPU* proc);
+void read_register(struct stack* pstk, struct registrs* preg, int registr);
+void push_register(struct stack* pstk, struct registrs* preg, int registr);
 void f_add(struct stack* pstk);
 void f_sub(struct stack* pstk);
 void f_dif(struct stack* pstk);
 void f_mul(struct stack* pstk);
-void f_out(struct stack* pstk, struct registrs* preg);
+void f_out(struct stack* pstk);
+void f_dmp(struct stack* pstk, struct registrs* preg);
 void f_in(struct stack* pstk);
 void f_push(struct stack* pstk, int value);
 void f_push_r(struct stack* pstk, struct registrs* preg, int registr);
 void f_pop(struct stack* pstk, struct registrs* preg, int registr);
-
+void scan(FILE* source, FILE* res, char* command, char* registr);
 
 enum command
 {
@@ -35,6 +39,14 @@ enum command
     out = 6,
     in = 7,
     pop = 8,
+    jmp = 9,
+    jb = 10,
+    jbe = 11,
+    ja = 12,
+    jae = 13,
+    je = 14,
+    jne = 15,
+    dmp = 16,
     push_r = 17,
     pop_r = 24,
     hlt = -1,
@@ -63,7 +75,15 @@ const struct operation ALL_COMMANDS[COMMAND_NUM] = {{"push", 1, push},
                                                     {"out", 0, out},
                                                     {"in", 0, in},
                                                     {"hlt", 0, hlt},
-                                                    {"pop", 1, pop}};
+                                                    {"pop", 1, pop},
+                                                    {"jmp", 1, jmp},
+                                                    {"jb", 1, jb},
+                                                    {"jbe", 1, jbe},
+                                                    {"ja", 1, ja},
+                                                    {"jae", 1, jae},
+                                                    {"je", 1, je},
+                                                    {"jne", 1, jne},
+                                                    {"dmp", 0, dmp}};
 
 struct registr
 {

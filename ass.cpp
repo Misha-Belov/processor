@@ -7,8 +7,16 @@ int main()
 
     char command[NAME_MAX] = {0};
     char registr[REGISTR_MAX] = {0};
-    // int value = 0;
 
+    scan(source, res, command, registr);
+
+    fclose(source);
+    fclose(res);
+}
+
+
+void scan(FILE* source, FILE* res, char* command, char* registr)
+{
     while (fscanf(source, "%s", command) != EOF)
     {
         for (int i = 0; i < COMMAND_NUM; i++)
@@ -52,7 +60,4 @@ int main()
             }
         }
     }
-
-    fclose(source);
-    fclose(res);
 }

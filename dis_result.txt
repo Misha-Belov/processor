@@ -12,6 +12,3 @@ add
 pop rax
 push rbx
 push 10
-jb 4
-dmp
-hlt

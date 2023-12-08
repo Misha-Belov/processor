@@ -7,13 +7,25 @@ int pop(struct stack* pstk);
 void stack_destruct(struct stack* pstk);
 void print_stack(struct stack* pstk);
 void add(struct stack* pstk);
+size_t hash_func(void* data, int size_of_data);
+bool stack_check(struct stack* pstk);
+
+const int CANARY = 0x888888;
+
 
 struct stack
 {
+    size_t canary1 = CANARY;
     int* data;
     int size;
     int capacity;
+    size_t hash_old;
+    size_t canary2 = CANARY;
 };
+
+
+// [(1,2,2),2,1,1,2,1,(k1,2,1,2,2,k2),1,2]
+
 
 int main()
 {
@@ -90,6 +102,12 @@ int pop(struct stack* pstk)
 
 void add(struct stack* pstk)
 {
+    if(!stack_check(pstk))
+    {
+        printf("stack was broken\n");
+        return;
+    }
+
     if (pstk->size <= 1)
     {
         printf("not enough numbers\n");
@@ -112,4 +130,15 @@ void stack_destruct(struct stack* pstk)
     pstk->data = NULL;
     pstk->capacity = 0;
     pstk->size = 0;
+}
+
+bool stack_check(struct stack* pstk)
+{
+    if(pstk->canary1 == CANARY && pstk->canary2 == CANARY)
+        return true;
+    return false;
+}
+
+size_t hash_func(void* data, int size_of_data)
+{
 }

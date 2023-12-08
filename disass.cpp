@@ -2,7 +2,7 @@
 
 int main()
 {
-    FILE* res = fopen("dis_source.txt", "w");
+    FILE* res = fopen("dis_result.txt", "w");
     FILE* source = fopen("digit.txt", "r");
 
     int dig_com = 0;
@@ -27,16 +27,16 @@ int main()
                 fscanf(source, "%d", &dig_com);
                 switch (dig_com)
                 {
-                    case 1:
+                    case rax:
                         fprintf(res, "%s\n", "rax");
                         break;
-                    case 2:
-                        fprintf(res, "%s\n", "rcx");
-                        break;
-                    case 3:
+                    case rbx:
                         fprintf(res, "%s\n", "rbx");
                         break;
-                    case 4:
+                    case rcx:
+                        fprintf(res, "%s\n", "rcx");
+                        break;
+                    case rdx:
                         fprintf(res, "%s\n", "rdx");
                         break;
                     default:
@@ -81,16 +81,16 @@ int main()
                 fscanf(source, "%d", &dig_com);
                 switch (dig_com)
                 {
-                    case 1:
+                    case rax:
                         fprintf(res, "%s\n", "rax");
                         break;
-                    case 2:
-                        fprintf(res, "%s\n", "rcx");
-                        break;
-                    case 3:
+                    case rbx:
                         fprintf(res, "%s\n", "rbx");
                         break;
-                    case 4:
+                    case rcx:
+                        fprintf(res, "%s\n", "rcx");
+                        break;
+                    case rdx:
                         fprintf(res, "%s\n", "rdx");
                         break;
                     default:

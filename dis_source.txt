@@ -1,9 +1,0 @@
-push 100
-push 200
-out
-pop rax
-out
-push rax
-add
-out
-hlt
