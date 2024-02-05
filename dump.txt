@@ -1,2 +1,2 @@
 
-5040      registr rax: 2; registr rbx: 1; registr rcx: 0; registr rdx: 0; 
+5 1 0 -1      registr rax: 0; registr rbx: 0; registr rcx: 0; registr rdx: 0; 

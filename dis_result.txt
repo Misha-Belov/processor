@@ -1,1 +1,15 @@
-push 5
+in
+push 1
+jbe 19
+pop rbx
+pop rax
+push rax
+push rax
+push 1
+sub
+dmp
+call 1
+mul
+ret
+dmp
+hlt

@@ -105,6 +105,72 @@ void scan(FILE* res, FILE* source)
                 }
                 break;
             }
+            case dmp:
+            {
+                fprintf(res, "%s", "dmp\n");
+                break;
+            }
+            case jmp:
+            {
+                fprintf(res, "%s", "jmp ");
+                fscanf(source, "%d", &dig_com);
+                fprintf(res, "%d\n", dig_com);
+                break;
+            }
+            case jb:
+            {
+                fprintf(res, "%s", "jb ");
+                fscanf(source, "%d", &dig_com);
+                fprintf(res, "%d\n", dig_com);
+                break;
+            }
+            case jbe:
+            {
+                fprintf(res, "%s", "jbe ");
+                fscanf(source, "%d", &dig_com);
+                fprintf(res, "%d\n", dig_com);
+                break;
+            }
+            case ja:
+            {
+                fprintf(res, "%s", "ja ");
+                fscanf(source, "%d", &dig_com);
+                fprintf(res, "%d\n", dig_com);
+                break;
+            }
+            case jae:
+            {
+                fprintf(res, "%s", "jae ");
+                fscanf(source, "%d", &dig_com);
+                fprintf(res, "%d\n", dig_com);
+                break;
+            }
+            case je:
+            {
+                fprintf(res, "%s", "je ");
+                fscanf(source, "%d", &dig_com);
+                fprintf(res, "%d\n", dig_com);
+                break;
+            }
+            case jne:
+            {
+                fprintf(res, "%s", "jne ");
+                fscanf(source, "%d", &dig_com);
+                fprintf(res, "%d\n", dig_com);
+                break;
+            }
+            case call:
+            {
+                fprintf(res, "%s", "call ");
+                fscanf(source, "%d", &dig_com);
+                fprintf(res, "%d\n", dig_com);
+                break;
+            }
+            case ret:
+            {
+                fprintf(res, "%s", "ret\n");
+                break;
+            }
             case hlt:
             {
                 fprintf(res, "%s", "hlt\n");
