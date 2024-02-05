@@ -5,7 +5,7 @@
 
 const int NAME_MAX = 5;
 const int REGISTR_MAX = 4;
-const int COMMAND_NUM = 19;
+const int COMMAND_NUM = 21;
 const int REGISTR_NUM = 4;
 
 const int INIT_CAPACITY = 10;
@@ -22,12 +22,14 @@ void f_sub(struct stack* pstk);
 void f_dif(struct stack* pstk);
 void f_mul(struct stack* pstk);
 void f_out(struct stack* pstk);
-void f_dmp(struct stack* pstk, struct registrs* preg);
+void f_dmp(struct stack* st, struct stack* pt, struct registrs* preg);
 void f_in(struct stack* pstk);
 void f_push(struct stack* pstk, int value);
 void f_push_r(struct stack* pstk, struct registrs* preg, int registr);
-void f_pop(struct stack* pstk, struct registrs* preg, int registr);
+void f_pop_r(struct stack* pstk, struct registrs* preg, int registr);
+void f_pop(struct stack* pstk);
 void scan(FILE* source, FILE* res, char* command, char* registr);
+void scan(FILE* res, FILE* source);
 
 enum command
 {
@@ -49,6 +51,8 @@ enum command
     dmp = 16,
     push_r = 17,
     pop_r = 24,
+    call = 25,
+    ret = 26,
     hlt = -1,
 };
 
@@ -83,7 +87,9 @@ const struct operation ALL_COMMANDS[COMMAND_NUM] = {{"push", 1, push},
                                                     {"jae", 1, jae},
                                                     {"je", 1, je},
                                                     {"jne", 1, jne},
-                                                    {"dmp", 0, dmp}};
+                                                    {"dmp", 0, dmp},
+                                                    {"call", 1, call},
+                                                    {"ret", 0, ret}};
 
 struct registr
 {
@@ -117,4 +123,5 @@ struct SPU
     int* array_command;
     int array_size;
     struct registrs reg;
+    struct stack pt;
 };

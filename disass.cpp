@@ -5,10 +5,16 @@ int main()
     FILE* res = fopen("dis_result.txt", "w");
     FILE* source = fopen("digit.txt", "r");
 
+    scan(res, source);
+
+    fclose(source);
+    fclose(res);
+}
+
+
+void scan(FILE* res, FILE* source)
+{
     int dig_com = 0;
-    // char command[NAME_MAX] = {0};
-    // char registr[REGISTR_MAX] = {0};
-    // int value = 0;
 
     while (fscanf(source, "%d", &dig_com) != EOF)
     {
@@ -106,12 +112,9 @@ int main()
             }
             default:
             {
-                return 0;
+                return;
                 break;
             }
         }
     }
-
-    fclose(source);
-    fclose(res);
 }

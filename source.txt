@@ -1,17 +1,15 @@
+in
 push 1
-pop rax
-push rax
-push rax
-push rax
-push rax
+jbe 19
 pop rbx
-mul
+pop rax
+push rax
 push rax
 push 1
-add
-pop rax
-push rbx
-push 10
-jb 4
+sub
+dmp
+call 1
+mul
+ret
 dmp
 hlt

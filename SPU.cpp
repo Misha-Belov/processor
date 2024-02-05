@@ -7,162 +7,7 @@ int main()
     SPU_construct(&proc);
     proc.array_command = fill_array(proc.array_command, &(proc.array_size));
 
-    // for(int i = 0; i < 31; i++)
-    //     printf("%d ", proc.array_command[i]);
-    // printf("\n");
-
-
     cmd_execution(&proc);
-
-//     int IP = 0;
-//
-//     for(;;)
-//     {
-//         // printf("%d\n", proc.array_command[IP]);
-//         // printf("\n");
-//         // printf("%d\n", proc.st.data[proc.st.size - 1]);
-//         switch(proc.array_command[IP])
-//         {
-//
-//             case push:
-//             {
-//                 f_push(&proc.st, proc.array_command[IP + 1]);
-//                 IP += 2;
-//                 break;
-//             }
-//             case push_r:
-//             {
-//                 f_push_r(&proc.st, &proc.reg, proc.array_command[IP + 1]);
-//                 IP += 2;
-//                 break;
-//             }
-//             case add:
-//             {
-//                 f_add(&proc.st);
-//                 IP++;
-//                 break;
-//             }
-//             case sub:
-//             {
-//                 f_sub(&proc.st);
-//                 IP++;
-//                 break;
-//             }
-//             case dif:
-//             {
-//                 f_dif(&proc.st);
-//                 IP++;
-//                 break;
-//             }
-//             case mul:
-//             {
-//                 f_mul(&proc.st);
-//                 IP++;
-//                 break;
-//             }
-//             case dmp:
-//             {
-//                 f_dmp(&proc.st, &proc.reg);
-//                 IP++;
-//                 break;
-//             }
-//             case in:
-//             {
-//                 f_in(&proc.st);
-//                 IP++;
-//                 break;
-//             }
-//             case out:
-//             {
-//                 f_out(&proc.st);
-//                 IP++;
-//                 break;
-//             }
-//             case jmp:
-//             {
-//                 IP = proc.array_command[IP + 1];
-//                 break;
-//             }
-//             case jb:
-//             {
-//                 if (proc.st.data[proc.st.size - 2] < proc.st.data[proc.st.size - 1])
-//                 {
-//                     IP = proc.array_command[IP + 1];
-//                     proc.st.size -= 2;
-//                 }
-//                 else IP += 2;
-//                 break;
-//             }
-//             case jbe:
-//             {
-//                 if (proc.st.data[proc.st.size - 2] <= proc.st.data[proc.st.size - 1])
-//                 {
-//                     IP = proc.array_command[IP + 1];
-//                     proc.st.size -= 2;
-//                 }
-//                 else IP += 2;
-//                 break;
-//             }
-//             case ja:
-//             {
-//                 if (proc.st.data[proc.st.size - 2] > proc.st.data[proc.st.size - 1])
-//                 {
-//                     IP = proc.array_command[IP + 1];
-//                     proc.st.size -= 2;
-//                 }
-//                 else IP += 2;
-//                 break;
-//             }
-//             case jae:
-//             {
-//                 if (proc.st.data[proc.st.size - 2] >= proc.st.data[proc.st.size - 1])
-//                 {
-//                     IP = proc.array_command[IP + 1];
-//                     proc.st.size -= 2;
-//                 }
-//                 else IP += 2;
-//                 break;
-//             }
-//             case je:
-//             {
-//                 if (proc.st.data[proc.st.size - 2] == proc.st.data[proc.st.size - 1])
-//                 {
-//                     IP = proc.array_command[IP + 1];
-//                     proc.st.size -= 2;
-//                 }
-//                 else IP += 2;
-//                 break;
-//             }
-//             case jne:
-//             {
-//                 if (proc.st.data[proc.st.size - 2] != proc.st.data[proc.st.size - 1])
-//                 {
-//                     IP = proc.array_command[IP + 1];
-//                     proc.st.size -= 2;
-//                 }
-//                 else IP += 2;
-//                 break;
-//             }
-//             case pop_r:
-//             {
-//                 f_pop(&proc.st, &proc.reg, proc.array_command[IP + 1]);
-//                 IP += 2;
-//                 break;
-//             }
-//             case hlt:
-//             {
-//                 SPU_deconstruct(&proc);
-//                 return 0;
-//                 break;
-//             }
-//             default:
-//             {
-//                 perror("wrong command\n");
-//                 return 0;
-//                 break;
-//             }
-//         }
-//     }
 }
 
 void cmd_execution(struct SPU* proc)
@@ -211,7 +56,7 @@ void cmd_execution(struct SPU* proc)
             }
             case dmp:
             {
-                f_dmp(&proc->st, &proc->reg);
+                f_dmp(&proc->st, &proc->pt, &proc->reg);
                 IP++;
                 break;
             }
@@ -237,7 +82,6 @@ void cmd_execution(struct SPU* proc)
                 if (proc->st.data[proc->st.size - 2] < proc->st.data[proc->st.size - 1])
                 {
                     IP = proc->array_command[IP + 1];
-                    proc->st.size -= 2;
                 }
                 else IP += 2;
                 break;
@@ -247,7 +91,6 @@ void cmd_execution(struct SPU* proc)
                 if (proc->st.data[proc->st.size - 2] <= proc->st.data[proc->st.size - 1])
                 {
                     IP = proc->array_command[IP + 1];
-                    proc->st.size -= 2;
                 }
                 else IP += 2;
                 break;
@@ -257,7 +100,6 @@ void cmd_execution(struct SPU* proc)
                 if (proc->st.data[proc->st.size - 2] > proc->st.data[proc->st.size - 1])
                 {
                     IP = proc->array_command[IP + 1];
-                    proc->st.size -= 2;
                 }
                 else IP += 2;
                 break;
@@ -267,7 +109,6 @@ void cmd_execution(struct SPU* proc)
                 if (proc->st.data[proc->st.size - 2] >= proc->st.data[proc->st.size - 1])
                 {
                     IP = proc->array_command[IP + 1];
-                    proc->st.size -= 2;
                 }
                 else IP += 2;
                 break;
@@ -277,7 +118,6 @@ void cmd_execution(struct SPU* proc)
                 if (proc->st.data[proc->st.size - 2] == proc->st.data[proc->st.size - 1])
                 {
                     IP = proc->array_command[IP + 1];
-                    proc->st.size -= 2;
                 }
                 else IP += 2;
                 break;
@@ -287,14 +127,36 @@ void cmd_execution(struct SPU* proc)
                 if (proc->st.data[proc->st.size - 2] != proc->st.data[proc->st.size - 1])
                 {
                     IP = proc->array_command[IP + 1];
-                    proc->st.size -= 2;
                 }
                 else IP += 2;
                 break;
             }
             case pop_r:
             {
-                f_pop(&proc->st, &proc->reg, proc->array_command[IP + 1]);
+                f_pop_r(&proc->st, &proc->reg, proc->array_command[IP + 1]);
+                IP += 2;
+                break;
+            }
+            case call:
+            {
+                f_push(&proc->pt, IP);
+                IP = proc->array_command[IP + 1];
+                break;
+            }
+            case ret:
+            {
+                if (proc->pt.size >= 1)
+                {
+                    IP = proc->pt.data[proc->pt.size - 1] + 2;
+                    printf("%d %d ", proc->pt.size, IP);
+                    f_pop(&proc->pt);
+                }
+                else
+                    IP += 1;
+                break;
+            }
+            case 0:
+            {
                 IP += 2;
                 break;
             }
@@ -448,7 +310,7 @@ void read_register(struct stack* pstk, struct registrs* preg, int registr)
     }
 }
 
-void f_pop(struct stack* pstk, struct registrs* preg, int registr)
+void f_pop_r(struct stack* pstk, struct registrs* preg, int registr)
 {
     if (pstk->size == 0)
     {
@@ -456,6 +318,18 @@ void f_pop(struct stack* pstk, struct registrs* preg, int registr)
     }
 
     read_register(pstk, preg, registr);
+    push_register(pstk, preg, registr);
+
+    pstk->size--;
+}
+
+void f_pop(struct stack* pstk)
+{
+    if (pstk->size == 0)
+    {
+        perror("stack is empty\n");
+    }
+
     pstk->size--;
 }
 
@@ -491,18 +365,23 @@ void f_in(struct stack* pstk)
     f_push(pstk, x);
 }
 
-void f_dmp(struct stack* pstk, struct registrs* preg)
+void f_dmp(struct stack* st, struct stack* pt, struct registrs* preg)
 {
-    FILE* dump = fopen("dump.txt", "w");
+    FILE* dump = fopen("dump.txt", "a");
 
-    if (pstk->size == 0)
+    if (st->size == 0)
     {
         perror("stack is empty\n");
         return;
     }
 
-    for (int i = 0; i < pstk->size; i++)
-        fprintf(dump, "%d ", *(pstk->data + i));
+    for (int i = 0; i < pt->size; i++)
+        fprintf(dump, "%d ", *(pt->data + i));
+
+    fprintf(dump, "\n");
+
+    for (int i = 0; i < st->size; i++)
+        fprintf(dump, "%d ", *(st->data + i));
 
     fprintf(dump, "     registr rax: %d; ", preg->rax);
     fprintf(dump, "registr rbx: %d; ", preg->rbx);
@@ -511,8 +390,10 @@ void f_dmp(struct stack* pstk, struct registrs* preg)
 
     fprintf(dump, "\n");
 
-    for (int i = 0; i < pstk->size; i++)
-        printf("%d ", *(pstk->data + i));
+    //--------------------------------------------------
+
+    for (int i = 0; i < st->size; i++)
+        printf("%d ", *(st->data + i));
 
     printf("     registr rax: %d; ", preg->rax);
     printf("registr rbx: %d; ", preg->rbx);
