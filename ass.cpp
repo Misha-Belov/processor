@@ -17,47 +17,72 @@ int main()
 
 void scan(FILE* source, FILE* res, char* command, char* registr)
 {
+//     struct stat st;
+//     stat("source.txt", &st);
+//     size_t size = st.st_size;
+//
+//     char* string = (char*) calloc((size + 1), sizeof(char));
+//     fread(string, sizeof(char), size, source);
+//
+//     char * pt = strchr(string, ';');
+//
+//     size_t i = 0;
+//
+//     while (*pt != '\n')
+//     {
+//         *pt = '\n';
+//         i++;
+//     }
+
     while (fscanf(source, "%s", command) != EOF)
     {
-        for (int i = 0; i < COMMAND_NUM; i++)
+        if (strchr(command, ';') == NULL)
         {
-            if (!strcmp(command, ALL_COMMANDS[i].command))
+            for (int i = 0; i < COMMAND_NUM; i++)
             {
-                if (ALL_COMMANDS[i].arg_num != 0)
+                if (!strcmp(command, ALL_COMMANDS[i].command))
                 {
-                    fscanf(source, "%s", registr);
+                    if (ALL_COMMANDS[i].arg_num != 0)
+                    {
+                        fscanf(source, "%s", registr);
 
-                    if (isdigit(registr[0]) || (registr[0] == '-' && isdigit(registr[1])))
-                    {
-                        printf("%d", ALL_COMMANDS[i].digital_com);
-                        fprintf(res, "%d", ALL_COMMANDS[i].digital_com);
-                        printf(" %s", registr);
-                        fprintf(res, " %s", registr);
-                    }
-                    else
-                    {
-                        for (int j = 0; j < REGISTR_NUM; j++)
+                        if (isdigit(registr[0]) || (registr[0] == '-' && isdigit(registr[1])))
                         {
-                            if (!strcmp(registr, ALL_REGISTRS[j].registr_name))
+                            printf("%d", ALL_COMMANDS[i].digital_com);
+                            fprintf(res, "%d", ALL_COMMANDS[i].digital_com);
+                            printf(" %s", registr);
+                            fprintf(res, " %s", registr);
+                        }
+                        else
+                        {
+                            for (int j = 0; j < REGISTR_NUM; j++)
                             {
-                                printf("%d", ALL_COMMANDS[i].digital_com + 16);
-                                fprintf(res, "%d", ALL_COMMANDS[i].digital_com + 16);
-                                printf(" %d", ALL_REGISTRS[j].digital_reg);
-                                fprintf(res, " %d", ALL_REGISTRS[j].digital_reg);
+                                if (!strcmp(registr, ALL_REGISTRS[j].registr_name))
+                                {
+                                    printf("%d", ALL_COMMANDS[i].digital_com + 16);
+                                    fprintf(res, "%d", ALL_COMMANDS[i].digital_com + 16);
+                                    printf(" %d", ALL_REGISTRS[j].digital_reg);
+                                    fprintf(res, " %d", ALL_REGISTRS[j].digital_reg);
+                                }
                             }
                         }
                     }
-                }
 
-                else
-                {
-                    printf("%d", ALL_COMMANDS[i].digital_com);
-                    fprintf(res, "%d", ALL_COMMANDS[i].digital_com);
-                }
+                    else
+                    {
+                        printf("%d", ALL_COMMANDS[i].digital_com);
+                        fprintf(res, "%d", ALL_COMMANDS[i].digital_com);
+                    }
 
-                printf("\n");
-                fprintf(res, "\n");
+                    printf("\n");
+                    fprintf(res, "\n");
+                }
             }
+        }
+        else
+        {
+            while(fgetc(source) != '\n')
+            {}
         }
     }
 }

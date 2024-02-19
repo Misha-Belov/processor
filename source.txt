@@ -1,4 +1,5 @@
 in
+begin:
 push 1
 jbe 19
 pop rbx
@@ -8,7 +9,7 @@ push rax
 push 1
 sub
 dmp
-call 1
+call begin ;1
 mul
 ret
 dmp

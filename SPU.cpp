@@ -148,7 +148,7 @@ void cmd_execution(struct SPU* proc)
                 if (proc->pt.size >= 1)
                 {
                     IP = proc->pt.data[proc->pt.size - 1] + 2;
-                    printf("%d %d ", proc->pt.size, IP);
+                    // printf("%d %d ", proc->pt.size, IP);
                     f_pop(&proc->pt);
                 }
                 else
@@ -375,6 +375,8 @@ void f_dmp(struct stack* st, struct stack* pt, struct registrs* preg)
         return;
     }
 
+    fprintf(dump, "return stack:   ");
+
     for (int i = 0; i < pt->size; i++)
         fprintf(dump, "%d ", *(pt->data + i));
 
@@ -388,7 +390,7 @@ void f_dmp(struct stack* st, struct stack* pt, struct registrs* preg)
     fprintf(dump, "registr rcx: %d; ", preg->rcx);
     fprintf(dump, "registr rdx: %d; ", preg->rdx);
 
-    fprintf(dump, "\n");
+    fprintf(dump, "\n\n");
 
     //--------------------------------------------------
 

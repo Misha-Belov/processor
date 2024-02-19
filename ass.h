@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <sys/stat.h>
 
 const int NAME_MAX = 5;
 const int REGISTR_MAX = 4;
