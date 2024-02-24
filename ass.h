@@ -4,10 +4,12 @@
 #include <ctype.h>
 #include <sys/stat.h>
 
-const int NAME_MAX = 5;
-const int REGISTR_MAX = 4;
+const int NAME_MAX = 15;
+const int REGISTR_MAX = 15;
+const int MARKER_MAX = 15;
 const int COMMAND_NUM = 21;
 const int REGISTR_NUM = 4;
+const int MARKER_NUM = 40;
 
 const int INIT_CAPACITY = 10;
 const int INIT_ARRAY = 10;
@@ -96,6 +98,13 @@ struct registr
 {
     char registr_name[REGISTR_MAX];
     int digital_reg;
+};
+
+struct marker
+{
+    char marker_name[MARKER_MAX];
+    int marker_pt;
+
 };
 
 const struct registr ALL_REGISTRS[REGISTR_NUM] = {  {"rax", 1},
