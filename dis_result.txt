@@ -1,15 +1,95 @@
-;in
-;push 1
-;jbe 19
-;pop rbx
-;pop rax
-;push rax
-;push rax
-;push 1
-;sub
-;dmp
-;call 1
-;mul
-;ret
-;dmp
-;hlt
+in
+in
+in
+push 0
+je 149
+pop rdx
+pop rcx
+push 0
+je 118
+pop rdx
+pop rbx
+push 0
+je 106
+pop rdx
+pop rax
+push rbx
+push rbx
+mul
+push 4
+push rax
+push rcx
+mul
+mul
+sub
+push 0
+jb 49
+je 57
+ja 74
+pop rdx
+pop rdx
+push 8888
+jmp 165
+pop rdx
+pop rdx
+push -1
+push rbx
+mul
+push 2
+push rax
+mul
+dif
+jmp 165
+pop rdx
+sqr pop rdx
+push rdx
+push -1
+mul
+push rbx
+sub
+push 2
+push rax
+mul
+dif
+push rdx
+push rbx
+sub
+push 2
+push rax
+mul
+dif
+jmp 165
+pop rax
+push rcx
+push -1
+mul
+push rbx
+dif
+jmp 165
+pop rbx
+pop rax
+push -1
+push rcx
+mul
+push rax
+dif
+push 0
+jb 49
+je 141
+pop rdx
+sqr jmp 165
+pop rdx
+pop rdx
+push 0
+jmp 165
+pop rcx
+pop rbx
+pop rax
+push -1
+push rbx
+mul
+push rax
+dif
+jmp 165
+dmp
+hlt

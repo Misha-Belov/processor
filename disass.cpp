@@ -27,6 +27,11 @@ void scan(FILE* res, FILE* source)
                 fprintf(res, "%d\n", dig_com);
                 break;
             }
+            case sqr:
+            {
+                fprintf(res, "%s", "sqr ");
+                break;
+            }
             case push_r:
             {
                 fprintf(res, "%s", "push ");

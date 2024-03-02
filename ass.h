@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <math.h>
 #include <sys/stat.h>
 
 const int NAME_MAX = 15;
@@ -9,7 +10,7 @@ const int REGISTR_MAX = 15;
 const int MARKER_MAX = 15;
 const int COMMAND_NUM = 21;
 const int REGISTR_NUM = 4;
-const int MARKER_NUM = 40;
+const int LABEL_NUM = 100;
 
 const int INIT_CAPACITY = 10;
 const int INIT_ARRAY = 10;
@@ -24,6 +25,7 @@ void f_add(struct stack* pstk);
 void f_sub(struct stack* pstk);
 void f_dif(struct stack* pstk);
 void f_mul(struct stack* pstk);
+void f_sqr(struct stack* pstk);
 void f_out(struct stack* pstk);
 void f_dmp(struct stack* st, struct stack* pt, struct registrs* preg);
 void f_in(struct stack* pstk);
@@ -56,6 +58,7 @@ enum command
     pop_r = 24,
     call = 25,
     ret = 26,
+    sqr = 27,
     hlt = -1,
 };
 
@@ -92,6 +95,7 @@ const struct operation ALL_COMMANDS[COMMAND_NUM] = {{"push", 1, push},
                                                     {"jne", 1, jne},
                                                     {"dmp", 0, dmp},
                                                     {"call", 1, call},
+                                                    {"sqr", 0, sqr},
                                                     {"ret", 0, ret}};
 
 struct registr
@@ -100,10 +104,10 @@ struct registr
     int digital_reg;
 };
 
-struct marker
+struct label
 {
-    char marker_name[MARKER_MAX];
-    int marker_pt;
+    char label_name[MARKER_MAX];
+    int label_pt;
 
 };
 

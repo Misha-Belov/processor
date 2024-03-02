@@ -1,17 +1,113 @@
 in
-begin:
-push 1
-jbe end
+in
+in
+push 0
+je c_null
+pop rdx
+pop rcx
+push 0
+je b_null
+pop rdx
+pop rbx
+push 0
+je a_null
+pop rdx
+pop rax
+push rbx
+push rbx
+mul
+push 4
+push rax
+push rcx
+mul
+mul
+sub
+push 0
+jb zero_root
+je one_root
+ja two_root
+
+zero_root:
+pop rdx
+pop rdx
+push 8888
+jmp end
+
+one_root:
+pop rdx
+pop rdx
+push -1
+push rbx
+mul
+push 2
+push rax
+mul
+div
+jmp end
+
+two_root:
+pop rdx
+sqr
+pop rdx
+push rdx
+push -1
+mul
+push rbx
+sub
+push 2
+push rax
+mul
+div
+push rdx
+push rbx
+sub
+push 2
+push rax
+mul
+div
+jmp end
+
+a_null:
+pop rax
+push rcx
+push -1
+mul
+push rbx
+div
+jmp end
+
+b_null:
 pop rbx
 pop rax
-push rax
-push rax
-push 1
-sub
-dmp
-call begin
-end:
+push -1
+push rcx
 mul
-ret
+push rax
+div
+push 0
+jb zero_root
+je one_null
+pop rdx
+sqr
+jmp end
+
+one_null:
+pop rdx
+pop rdx
+push 0
+jmp end
+
+c_null:
+pop rcx
+pop rbx
+pop rax
+push -1
+push rbx
+mul
+push rax
+div
+jmp end
+
+end:
 dmp
 hlt

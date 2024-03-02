@@ -35,42 +35,47 @@ void scan(FILE* source, FILE* res, char* command, char* registr)
 //     }
 
     int pt = 0;
-    int marker_num = 0;
+    int label_num = 0;
 
     // marker * marker_arr = (marker *) calloc(1, sizeof(marker));
-    marker marker_arr[MARKER_NUM] = {};
+    label label_arr[LABEL_NUM] = {};
 
     while (fscanf(source, "%s", command) != EOF)
     {
         // printf("%s\n", command);
         if ((strchr(command, ':')) != NULL)
         {
-            strcpy(marker_arr[marker_num].marker_name, command);
-            marker_arr[marker_num].marker_pt = pt;
-            marker_num++;
+            strcpy(label_arr[label_num].label_name, command);
+            label_arr[label_num].label_pt = pt;
+            label_num++;
             pt--;
-            // printf("pt - %d\n", pt);
+            printf("%s - %d\n", command, pt);
         }
         pt++;
     }
 
+    for (int k = 0; k < LABEL_NUM; k++)
+    {
+        printf("%s - %d out of %d\n", label_arr[k].label_name, k, LABEL_NUM);
+    }
+
     fseek(source, 0, SEEK_SET);
 
-    int is_marker = 0;
+    int is_label = 0;
 
     while (fscanf(source, "%s", command) != EOF)
     {
         if (strchr(command, ';') == NULL)
         {
-            for (int k = 0; k < MARKER_NUM; k++)
+            for (int k = 0; k < LABEL_NUM; k++)
             {
-                if (!strcmp(command, marker_arr[k].marker_name))
+                if (!strcmp(command, label_arr[k].label_name))
                 {
-                    is_marker = 1;
+                    is_label = 1;
                 }
             }
 
-            if (is_marker == 0)
+            if (is_label == 0)
             {
                 for (int i = 0; i < COMMAND_NUM; i++)
                 {
@@ -99,14 +104,14 @@ void scan(FILE* source, FILE* res, char* command, char* registr)
                                         fprintf(res, " %d", ALL_REGISTRS[j].digital_reg);
                                     }
                                 }
-                                for (int k = 0; k < REGISTR_NUM; k++)
+                                for (int k = 0; k < LABEL_NUM; k++)
                                 {
-                                    if(strstr(marker_arr[k].marker_name, registr) != NULL)
+                                    if(strstr(label_arr[k].label_name, registr) != NULL)
                                     {
                                         printf("%d", ALL_COMMANDS[i].digital_com);
                                         fprintf(res, "%d", ALL_COMMANDS[i].digital_com);
-                                        printf(" %d", marker_arr[k].marker_pt);
-                                        fprintf(res, " %d", marker_arr[k].marker_pt);
+                                        printf(" %d", label_arr[k].label_pt);
+                                        fprintf(res, " %d", label_arr[k].label_pt);
                                     }
                                 }
                             }
@@ -129,7 +134,7 @@ void scan(FILE* source, FILE* res, char* command, char* registr)
             {}
         }
 
-        is_marker = 0;
+        is_label = 0;
     }
 
     // free(marker_arr);

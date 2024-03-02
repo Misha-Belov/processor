@@ -54,6 +54,12 @@ void cmd_execution(struct SPU* proc)
                 IP++;
                 break;
             }
+            case sqr:
+            {
+                f_sqr(&proc->st);
+                IP++;
+                break;
+            }
             case dmp:
             {
                 f_dmp(&proc->st, &proc->pt, &proc->reg);
@@ -355,6 +361,11 @@ void f_mul(struct stack* pstk)
 {
     pstk->data[pstk->size - 2] = pstk->data[pstk->size - 2] * pstk->data[pstk->size - 1];
     pstk->size--;
+}
+
+void f_sqr(struct stack* pstk)
+{
+    pstk->data[pstk->size - 1] = (int) sqrt(pstk->data[pstk->size - 1]);
 }
 
 void f_in(struct stack* pstk)
